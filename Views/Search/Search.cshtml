@@ -1,0 +1,88 @@
+﻿@model List<EADWebProject.Models.Ad>
+
+@{
+       
+    Layout = null;
+    Layout = "~/Views/Home/Menu1.cshtml";
+}
+
+
+<div align="right"><marquee behavior="scroll" direction="left"><img src="~/Content/themes/anim3.gif" width="100" height="100" alt="smile" /></marquee></div>
+    
+    <div class="span6">
+        <h2>Search Result</h2>
+          <br />
+    </div>
+    <div class="span9"  >
+         <h6> SEARCH BY: </h6>
+            <br />
+            <select style="width:50%" id="search">
+                <option > Tittle </option>
+                <option > Category </option>
+               
+            </select>
+        <div id="view">
+            <table id=table1>
+                </table>
+        </div>
+        <div>
+            <table id=table>
+                </table>
+            
+        </div>
+         <script>
+             $(document).ready(function () {
+                 $('#search').click(function ()
+                 {
+                     value = $('#search').val();
+                     $('#table1 tr').remove(); 
+                     $('#table tr').remove();
+                     //search through title
+                     if (value == "Tittle")
+                     {
+                         $('#table1').append('<tr><td>@Html.Label("Title")</td><td><input type=text id=tittle  /></td><td><Button id=but>Search</Button></td></tr>');
+                         $('#but').click(function ()
+                         {
+                             tittle = $('#tittle').val();
+                             $.getJSON("../Product/getProductDetails?tittle="+ tittle, function (data) {
+
+                                 $('#table tr').remove();
+                                 $.each(data, function (i, item)
+                                 {
+                                     $('#table').append('<tr class="span3"><td><div class="thumbnail"> <img src="/Files/' + item.file + '" alt="Sample Image" width="100" height="100">  <div class="caption"><h4>' + item.title + '</h4><table><tr><td><form method="Post" action="/Home/Details"><input type=Hidden name="tittle" value="' + item.title + '" /><input type=submit class="btn btn-info" value="Details"/></form></td> <td></td></tr> </table></div></div></td></tr>  ');
+
+                                 });
+
+
+
+                             });
+                         });
+                     }
+                       //  search through price
+                     else if (value == "Category")
+                     {
+                         $('#table1').append('<tr><td>@Html.Label("Category")</td><td><input type=text id=cat  /></td><td><Button id=but>Search</Button></td></tr>');
+                         $('#but').click(function () {
+                             tittle = $('#cat').val();
+                             $.getJSON("../Product/getProductDetailsByCat?cat=" + tittle, function (data) {
+
+                                 $('#table tr').remove();
+                                 $.each(data, function (i, item) {
+                                     $('#table').append('<tr class="span3"><td><div class="thumbnail"> <img src="/Files/' + item.file + '" alt="Sample Image" width="100" height="100">  <div class="caption"><h4>' + item.title + '</h4><table><tr><td><form method="Post" action="/Home/Details"><input type=Hidden name="tittle" value="' + item.title + '" /><input type=submit class="btn btn-info" value="Details"/></form></td> <td></td></tr> </table></div></div></td></tr>  ');
+
+                                 });
+
+                             });
+                         });
+                     }
+                         
+                    
+                    
+                 });
+             });
+                </script>
+
+
+    </div>
+
+   

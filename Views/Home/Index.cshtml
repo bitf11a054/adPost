@@ -1,0 +1,59 @@
+﻿@model List<EADWebProject.Models.Ad>
+@{
+       
+}
+
+<script>
+    var temp = $('#one').val();
+    //alert(temp);
+    if (temp == "True") {
+        
+        $('#login').hide();
+    }
+</script>
+
+@*@Html.Html5().Media.Video("Bech de","~/myVideos/olx.3gp","Browser does not support") *@
+
+    <h3 align="left"> You can Take a tour of video.</h3>
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<video width="350" height="250" controls>
+  <source src="~/myVideos/olx.mp4" type="video/mp4">
+
+Your browser does not support the video tag.
+</video>
+
+  
+
+   <div class="span9"  >
+        <ul class="thumbnails">
+            @if(Model != null)
+            {
+                foreach(var r in Model)
+                {
+            <li class="span3">
+                <div class="thumbnail">
+                    <img src="~/Files/@r.file" alt="Sample Image" style="height:200px;width:200px;">
+                    <div class="caption">
+                        <h4>@r.title</h4>
+                        <table>
+                            <tr>
+                                <td>
+                         @using (Html.BeginForm("Details", "Home", FormMethod.Post))
+                         {
+                             @Html.Hidden("tittle",@r.title);
+                            <button type="submit" class="btn btn-info"> Details</button>
+                         }  </td>
+                        
+                                </tr>
+                            </table>
+                    </div>
+                </div>
+            </li>
+                }
+            }
+            
+            
+        </ul>
+
+       </div>

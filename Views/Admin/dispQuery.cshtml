@@ -1,0 +1,45 @@
+﻿@model List<EADWebProject.Models.Contact>
+@{
+       
+    Layout = null;
+    Layout = "~/Views/Admin/Menu.cshtml";
+}
+
+<script>
+    var temp = $('#one').val();
+    //alert(temp);
+    if (temp == "True") {
+        
+        $('#login').hide();
+    }
+</script>
+   <div class="span9"  >
+       <marquee behavior="scroll" direction="right"><img src="~/Content/themes/anim6.gif" width="100" height="100" alt="smile" /></marquee>
+        <ul class="thumbnails">
+            @if(Model != null)
+            {
+                
+                 <table>
+                      <thead><b>User ID:</b> </thead> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <thead><b>Queries:</b> </thead>
+              @foreach(var r in Model)
+                {                           
+                            <tr>
+                                <td>
+                      <input type="text" value="@r.Id" readonly="true" />
+                                 </td>
+                        
+                                <td>
+                      <input type="text" value="@r.queries" readonly="true" />
+                                 </td>
+                        
+                                </tr>              
+            
+                }
+                      </table>
+            }
+            
+            
+        </ul>
+
+       </div>
